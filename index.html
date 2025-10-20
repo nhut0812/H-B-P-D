@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>💐 Chúc mừng 20/10 💐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(-45deg, #ffb6c1, #ffd1dc, #ff9a9e, #fecfef);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Khung thiệp chính */
+    main {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(255, 105, 180, 0.4);
+      padding: 30px 40px;
+      width: min(90%, 900px);
+      z-index: 2;
+      color: #fff;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 0 12px #ff7eb3, 0 0 24px #ff69b4;
+      animation: glow 4s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: clamp(18px, 2vw, 24px);
+      color: #fff0f5;
+      margin-top: 16px;
+      text-shadow: 0 0 6px rgba(255,0,90,0.6), 0 0 12px rgba(255,180,220,0.9);
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 15px #ffb6c1, 0 0 25px #ff7eb3; }
+      to { text-shadow: 0 0 25px #fff, 0 0 40px #ff69b4; }
+    }
+
+    img.banner {
+      width: 100%;
+      max-width: 800px;
+      margin: 24px auto 12px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,182,193,0.8);
+      transition: transform .5s ease;
+      animation: float 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes float {
+      from {transform: translateY(0);}
+      to {transform: translateY(-10px);}
+    }
+
+    canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+
+    .floating {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255,0,100,0.8), 0 0 14px rgba(255,255,255,0.9);
+      opacity: 0;
+      animation: floatDown 12s linear forwards;
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    @keyframes floatDown {
+      0% { transform: translateX(-50%) translateY(-10vh) scale(0.9); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(-50%) translateY(110vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Nút nhạc */
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #ff9a9e, #ff6f91);
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      transition: all .3s ease;
+    }
+
+    #music-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #fff;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <main>
+    <h1>💐 Chúc mừng Ngày Phụ Nữ Việt Nam 20/10 💐</h1>
+    <img src="assets/20-10.svg" class="banner" alt="Chúc mừng 20/10">
+    <p>Chúc bạn luôn xinh đẹp, mạnh mẽ, rạng rỡ và hạnh phúc mỗi ngày! 🌸</p>
+  </main>
+
+  <button id="music-btn" title="Bật/tắt nhạc">🔊</button>
+
+  <audio id="bgm" loop autoplay>
+    <source src="assets/soft-piano.mp3" type="audio/mpeg">
+  </audio>
+
+<script>
+  // 🎉 Confetti
+  (() => {
+    const c = document.getElementById('confetti');
+    const ctx = c.getContext('2d');
+    const DPR = window.devicePixelRatio || 1;
+    let W, H, pieces = [];
+
+    function resize() {
+      W = c.width = innerWidth * DPR;
+      H = c.height = innerHeight * DPR;
+      c.style.width = innerWidth + 'px';
+      c.style.height = innerHeight + 'px';
+    }
+
+    function rand(a,b){return a+Math.random()*(b-a);}
+    function spawn(n=220){
+      pieces = Array.from({length:n},()=>({
+        x:rand(0,W),y:rand(-H,0),
+        w:rand(6,16)*DPR,h:rand(8,22)*DPR,
+        vy:rand(1,3)*DPR,vx:rand(-1,1)*DPR,
+        rot:rand(0,Math.PI*2),vr:rand(-0.1,0.1),
+        hue:rand(300,360),sat:rand(70,100),light:rand(60,80),
+      }));
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of pieces){
+        p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;
+        if(p.y>H+40)p.y=-10;
+        ctx.save();
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle=`hsl(${p.hue},${p.sat}%,${p.light}%)`;
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    addEventListener('resize',resize);
+    resize(); spawn(); draw();
+  })();
+
+  // 🌸 Floating text - tránh chồng chéo
+  const messages = [
+    "💖 Chúc bạn luôn xinh đẹp và rạng rỡ!",
+    "🌸 Mãi là bông hoa tươi thắm!",
+    "✨ Tự tin – Thành công – Hạnh phúc!",
+    "💐 Chúc mừng Ngày Phụ Nữ Việt Nam!",
+    "❤️ Cảm ơn vì bạn là chính bạn!",
+    "🌷 Hôm nay là của bạn, tận hưởng nhé!",
+    "🌹 Happy Vietnamese Women’s Day 20/10!",
+    "🌼 Chúc bạn luôn mỉm cười và vui vẻ!",
+    "💞 Mong mọi ước mơ của bạn đều thành hiện thực!",
+    "🎀 Mỗi ngày đều là ngày đặc biệt của bạn!",
+    "🌻 Hãy tỏa sáng như chính bạn!",
+    "💫 Gửi ngàn yêu thương đến bạn hôm nay!",
+    "🍀 Chúc bạn luôn gặp may mắn và bình an!",
+    "💎 Bạn là viên ngọc quý nhất thế gian!",
+    "🌈 Cuộc sống đẹp hơn vì có bạn!",
+    "💌 Gửi đến bạn muôn vàn lời chúc yêu thương!",
+    "🦋 Hãy bay cao với đôi cánh tự tin nhé!",
+    "🌺 Ngày 20/10 tràn ngập niềm vui nhé!",
+    "💕 Cảm ơn bạn vì đã làm cuộc sống này tươi đẹp hơn!",
+    "🎉 Chúc bạn luôn được yêu thương thật nhiều!"
+  ];
+
+  const activeX = []; // vị trí X đang dùng
+
+  function createFloatingText(){
+    const msg = messages[Math.floor(Math.random()*messages.length)];
+    const el = document.createElement('div');
+    el.className='floating';
+    el.textContent = msg;
+
+    // Chọn vị trí X không trùng
+    let x;
+    const minGap = 15; // khoảng cách tối thiểu (%)
+    let safe = false;
+    let tries = 0;
+    while (!safe && tries < 30) {
+      x = Math.random() * 80 + 10;
+      safe = activeX.every(px => Math.abs(px - x) > minGap);
+      tries++;
+    }
+    activeX.push(x);
+    el.style.left = x + '%';
+
+    el.style.animationDelay = (Math.random()*2) + 's';
+    el.style.fontSize = (Math.random()*10+22)+'px';
+    el.style.color = `hsl(${Math.random()*60+300},90%,90%)`;
+    document.body.appendChild(el);
+
+    // Sau khi biến mất, xóa khỏi danh sách vị trí đang dùng
+    setTimeout(()=>{
+      el.remove();
+      const idx = activeX.indexOf(x);
+      if (idx > -1) activeX.splice(idx,1);
+    },12000);
+  }
+
+  setInterval(createFloatingText, 900);
+
+  // 🎵 Music toggle
+  const music = document.getElementById('bgm');
+  const btn = document.getElementById('music-btn');
+  let playing = true;
+  btn.onclick = () => {
+    if (playing) {
+      music.pause();
+      btn.textContent = '🔇';
+    } else {
+      music.play();
+      btn.textContent = '🔊';
+    }
+    playing = !playing;
+  };
+</script>
+
+</body>
+</html>

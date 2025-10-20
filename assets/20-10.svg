@@ -1,0 +1,48 @@
+<!-- assets/20-10.svg -->
+<svg width="1200" height="360" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff9a9e"></stop>
+      <stop offset="50%" stop-color="#fecfef"></stop>
+      <stop offset="100%" stop-color="#f6d365"></stop>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff758c"></stop>
+      <stop offset="100%" stop-color="#ff7eb3"></stop>
+    </linearGradient>
+    <style>
+      .title {
+        font: 700 72px/1.1 "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        fill: #ffffff;
+        paint-order: stroke;
+        stroke: rgba(255,255,255,0.25);
+        stroke-width: 6px;
+      }
+      .subtitle {
+        font: 500 28px/1.4 "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        fill: #4d0033;
+      }
+      .pill {
+        font: 600 20px "Segoe UI", Roboto, Arial, sans-serif;
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="360" fill="url(#g1)"></rect>
+  <!-- Soft blobs -->
+  <circle cx="1080" cy="80" r="140" fill="url(#g2)" opacity="0.35"></circle>
+  <circle cx="120" cy="300" r="180" fill="#ffd1dc" opacity="0.35"></circle>
+  <circle cx="420" cy="40" r="90" fill="#fff0f5" opacity="0.5"></circle>
+
+  <!-- Title -->
+  <g transform="translate(80,120)">
+    <text class="title">Chúc mừng 20/10 💐</text>
+    <text class="subtitle" y="70">Gửi lời yêu thương đến những người phụ nữ tuyệt vời quanh ta!</text>
+  </g>
+
+  <!-- Pills -->
+  <g transform="translate(80,260)">
+    <rect rx="18" ry="18" width="210" height="40" fill="#ff7eb3"></rect>
+    <text class="pill" x="20" y="26">Vietnamese Women's Day</text>
+  </g>
+</svg>
