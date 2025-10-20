@@ -261,6 +261,15 @@
     }
     playing = !playing;
   };
+    // 🎧 Bắt sự kiện đầu tiên của người dùng để phát nhạc
+  document.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      btn.textContent = '🔊';
+      playing = true;
+    }
+  }, { once: true });
+
 </script>
 
 </body>
