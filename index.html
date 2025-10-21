@@ -189,14 +189,16 @@ h1 {
 .modal.show { display: flex; }
 
 .pop {
-  background: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.35);
   border: 3px solid rgba(255,150,200,.4);
-  border-radius: 16px;
-  padding: 6vw 5vw;
-  width: 90vw;
-  max-height: 90dvh; /* tăng chiều cao thêm */
+  border-radius: 18px;
+  padding: 7vw 5vw;
+  width: 92vw;
+  height: auto;
+  max-height: none;
+  min-height: 95dvh; /* chiếm gần full chiều cao màn hình */
   text-align: center;
-  box-shadow: 0 0 40px rgba(255,150,200,.3);
+  box-shadow: 0 0 45px rgba(255,150,200,.4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
