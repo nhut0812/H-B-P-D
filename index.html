@@ -175,7 +175,7 @@ h1 {
 }
 @keyframes blink { 50% { border-color: transparent; } }
 
-/* 🎁 Popup quà (fix iPhone layout) */
+/* 🎁 Popup quà */
 .modal {
   position: fixed;
   inset: 0;
@@ -196,7 +196,7 @@ h1 {
   width: 92vw;
   height: auto;
   max-height: none;
-  min-height: 95dvh; /* chiếm gần full chiều cao màn hình */
+  min-height: 95dvh;
   text-align: center;
   box-shadow: 0 0 45px rgba(255,150,200,.4);
   display: flex;
@@ -275,6 +275,10 @@ h1 {
 </head>
 <body>
 
+<!-- 💖 Nhạc nền -->
+<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" preload="auto" loop></audio>
+
+
 <div id="stars"></div>
 
 <div class="card" id="card">
@@ -293,7 +297,7 @@ h1 {
     <button class="btn" id="blow">🎂 Thổi nến</button>
     <div id="final" style="display:none;">
       <div class="confetti" id="confetti"></div>
-      <p class="wish">Chúc Tuyết Ngọc luôn xinh đẹp, hạnh phúc và rạng rỡ như hôm nay 💖</p>
+      <p class="wish">Chúc Tuyết Ngọc mãi xinh tươi, rạng rỡ và tràn đầy yêu thương — để nụ cười của Ngọc luôn khiến mọi người quanh mình thấy ấm áp 💕</p>
     </div>
   </div>
 </div>
@@ -351,11 +355,19 @@ const confettiBox=document.getElementById('confetti');
 const line1=document.getElementById('line1');
 const line2=document.getElementById('line2');
 
+// 🎵 Nhạc nền
+const music = document.getElementById('bgMusic');
+
 openCard.onclick=()=>{
   inside.style.display='block';
   openCard.style.display='none';
   typeText("Chúc mừng sinh nhật", line1, ()=>typeText("Tuyết Ngọc", line2));
   createCandles();
+
+  // 🎵 Phát nhạc khi mở thiệp
+  music.play().catch(() => {
+    console.log("Trình duyệt có thể chặn tự động phát nhạc, người dùng cần tương tác trước.");
+  });
 };
 
 // 🕯️ Nến
