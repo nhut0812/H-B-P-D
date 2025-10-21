@@ -18,7 +18,7 @@ body {
   overflow: hidden;
 }
 
-/* ✨ Nền sao rơi */
+/* ✨ Sao rơi */
 #stars {
   position: fixed;
   inset: 0;
@@ -43,7 +43,7 @@ body {
   z-index: 2;
   background: rgba(255,255,255,0.4);
   border-radius: 20px;
-  padding: 40px;
+  padding: 5vw;
   width: min(90vw,800px);
   text-align: center;
   box-shadow: 0 0 30px rgba(255,150,200,0.3);
@@ -52,18 +52,19 @@ body {
 h1 {
   font-family: 'Great Vibes', cursive;
   color: #ff4fa1;
-  font-size: 56px;
+  font-size: clamp(32px,6vw,56px);
   margin: 0;
 }
 .btn {
   background: linear-gradient(120deg,#ff9ace,#ff64b3);
   border: none;
   border-radius: 10px;
-  padding: 12px 26px;
+  padding: clamp(10px,2vw,14px) clamp(20px,4vw,28px);
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   margin-top: 20px;
+  font-size: clamp(16px,3vw,20px);
   box-shadow: 0 4px 12px rgba(255,100,179,0.3);
 }
 .btn:hover { transform: scale(1.08); }
@@ -71,7 +72,7 @@ h1 {
 /* 🎂 Bánh kem */
 .cake-wrap {
   position: relative;
-  width: min(400px,80vw);
+  width: min(80vw,400px);
   aspect-ratio: 1/1;
   margin: 40px auto 0;
 }
@@ -79,16 +80,16 @@ h1 {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #ffd5e5; /* Mặt bánh hồng pastel phẳng */
-  border: 12px solid #fff; /* Viền kem trắng ngoài */
+  background: #ffd5e5;
+  border: clamp(6px,2vw,12px) solid #fff;
   box-shadow: 0 0 15px rgba(255,180,210,0.5) inset;
 }
 .cake::before {
   content: "";
   position: absolute;
-  inset: 8px;
+  inset: clamp(4px,1vw,8px);
   border-radius: 50%;
-  border: 8px solid #ff9cc7; /* Viền hồng đậm trong */
+  border: clamp(4px,1vw,8px) solid #ff9cc7;
 }
 .cake::after {
   content: "";
@@ -106,8 +107,8 @@ h1 {
 /* 🕯️ Nến */
 .candle {
   position: absolute;
-  width: 10px;
-  height: 40px;
+  width: clamp(6px,1.8vw,10px);
+  height: clamp(25px,5vw,40px);
   background: #8fd7ff;
   border-radius: 5px;
   left: 50%;
@@ -119,7 +120,8 @@ h1 {
   position: absolute;
   top: -15px; left: 50%;
   transform: translateX(-50%);
-  width: 10px; height: 15px;
+  width: clamp(6px,1.6vw,10px);
+  height: clamp(10px,3vw,15px);
   border-radius: 50%;
   background: radial-gradient(circle at 50% 30%, #fffad0 0%, #ffb200 50%, transparent 70%);
   filter: drop-shadow(0 0 8px #ffb200);
@@ -147,24 +149,23 @@ h1 {
   to { opacity: 0; transform: translate(-50%, -40px); }
 }
 
-
-/* ✨ Chữ 2 hàng – căn giữa bánh */
+/* ✨ Chữ 2 hàng giữa bánh */
 .name {
   position: absolute;
   width: 100%;
-  top: 50%; /* đưa chữ vào đúng giữa bánh */
-  transform: translateY(-50%); /* căn giữa chính xác theo chiều dọc */
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
   font-family: 'Great Vibes', cursive;
-  font-size: 34px;
+  font-size: clamp(22px,5vw,34px);
   color: #fff;
   text-shadow: 0 0 10px #ffc0e4;
-  line-height: 1.2; /* khoảng cách dòng hợp lý */
+  line-height: 1.3;
 }
 .name span:last-child {
   display: block;
   color: #ff3f9e;
-  font-size: 38px;
+  font-size: clamp(26px,6vw,38px);
   margin-top: 4px;
 }
 .typing {
@@ -195,8 +196,8 @@ h1 {
   text-align: center;
   box-shadow: 0 0 40px rgba(255,150,200,.3);
 }
-.pop h3 { color: #ff3f9e; font-size: 30px; }
-.question { margin-bottom: 20px; font-size: 20px; color: #661a3a; }
+.pop h3 { color: #ff3f9e; font-size: clamp(22px,5vw,30px); }
+.question { margin-bottom: 20px; font-size: clamp(16px,4vw,20px); color: #661a3a; }
 
 .arena {
   position: relative;
@@ -208,7 +209,7 @@ h1 {
   gap: 20px;
 }
 .btn-yes, .btn-no {
-  padding: 14px 22px;
+  padding: clamp(10px,2vw,14px) clamp(18px,4vw,22px);
   border: none;
   border-radius: 12px;
   font-weight: 700;
@@ -216,6 +217,7 @@ h1 {
   transition: .2s;
   position: relative;
   z-index: 5;
+  font-size: clamp(14px,3vw,18px);
 }
 .btn-yes {
   background: linear-gradient(120deg,#a6ffb5,#4dff7a);
@@ -250,7 +252,7 @@ h1 {
 }
 .wish {
   margin-top: 20px;
-  font-size: 26px;
+  font-size: clamp(20px,5vw,26px);
   font-family: 'Great Vibes', cursive;
   color: #ff3f9e;
   text-shadow: 0 0 10px #ffc0e4;
@@ -348,7 +350,8 @@ function createCandles(){
     const c=document.createElement('div');
     c.className='candle';
     const angle=(i/22)*360;
-    c.style.transform=`translate(-50%,-100%) rotate(${angle}deg) translate(150px) rotate(${-angle}deg)`;
+    const radius=cakeWrap.offsetWidth*0.37;
+    c.style.transform=`translate(-50%,-100%) rotate(${angle}deg) translate(${radius}px) rotate(${-angle}deg)`;
     cakeWrap.appendChild(c);
   }
 }
