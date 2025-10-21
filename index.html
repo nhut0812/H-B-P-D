@@ -1,390 +1,424 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Thiệp Sinh Nhật – Tuyết Ngọc</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chúc mừng sinh nhật Tuyết Ngọc 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0e1024; --panel:#1a1d3a; --text:#f7f8ff; --muted:#b6bbd8;
-    --accent:#ff7ab6; --accent2:#6ee6ff; --gold:#ffcf4a; --frost:#fff7fb;
-    --cake-pink:#ffb7d9; --cake-cream:#ffe6f4; --plate:#d6e2ff;
-    --candle:#69d0ff; --flame:#ffb200;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; color:var(--text);
-    background:
-      radial-gradient(1200px 600px at 80% -200px, #1d2348 0%, transparent 60%),
-      radial-gradient(1000px 700px at -100px 100%, #2a1a43 0%, transparent 65%),
-      var(--bg);
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    display:flex; align-items:center; justify-content:center;
-    overflow-x:hidden;
-  }
-  .app{ width:min(980px,96vw); padding:24px }
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #ffeef7, #ffd8eb, #ffc6e3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
 
-  .card{
-    background:linear-gradient(165deg,#262a54,#181a35);
-    border:1px solid #2c2f63; border-radius:20px;
-    box-shadow:0 14px 48px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.05);
-    overflow:hidden; position:relative;
-  }
-  .cover{ padding:48px 28px; text-align:center; transition:.6s ease }
-  .title{ font-size:clamp(26px,4.4vw,40px); margin:0 0 8px }
-  .subtitle{ color:var(--muted); margin:0 0 22px }
-  .btn{
-    appearance:none; border:0; cursor:pointer; padding:14px 20px; border-radius:12px;
-    font-weight:800; letter-spacing:.3px;
-    background:linear-gradient(180deg,var(--accent),#ff4fa1); color:#240018;
-    box-shadow:0 10px 28px rgba(255,79,161,.35); transition:transform .08s ease;
-  }
-  .btn:hover{ transform:translateY(-1px) }
-  .btn:active{ transform:translateY(1px) scale(.98) }
+/* ✨ Nền sao rơi */
+#stars {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #fff9c4;
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  from { transform: translateY(-10vh); opacity: 1; }
+  to { transform: translateY(110vh); opacity: 0; }
+}
 
-  .inside{ max-height:0; overflow:hidden; opacity:.0; padding:0; transition:max-height .8s ease, opacity .6s ease, padding .6s ease }
-  .card.opened .cover{ transform:translateY(-8px) scale(.985); opacity:.5; filter:blur(.5px) }
-  .card.opened .inside{ max-height:2000px; opacity:1; padding:28px }
+/* 💌 Thiệp */
+.card {
+  z-index: 2;
+  background: rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: 40px;
+  width: min(90vw,800px);
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255,150,200,0.3);
+  backdrop-filter: blur(12px);
+}
+h1 {
+  font-family: 'Great Vibes', cursive;
+  color: #ff4fa1;
+  font-size: 56px;
+  margin: 0;
+}
+.btn {
+  background: linear-gradient(120deg,#ff9ace,#ff64b3);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 26px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(255,100,179,0.3);
+}
+.btn:hover { transform: scale(1.08); }
 
-  .stage{ display:flex; flex-direction:column; align-items:center; gap:16px }
-  .cake-wrap{ position:relative; width:min(560px,90vw); aspect-ratio:1/1; margin:6px auto }
-  .plate{
-    position:absolute; left:50%; transform:translateX(-50%); bottom:-14px;
-    width:88%; height:22px; border-radius:30px;
-    background: radial-gradient(ellipse at center, var(--plate), #c5d3fb 65%, #a3b3ea 100%);
-    filter: drop-shadow(0 10px 24px rgba(0,0,0,.35));
-  }
-  .cake{
-    position:absolute; inset:6% 6% 10% 6%;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), transparent 30%),
-      conic-gradient(from 0deg, #ffd7ec, #ffe9f6, #ffd7ec);
-    box-shadow: inset 0 0 0 10px var(--cake-cream), inset 0 0 0 20px var(--cake-pink), 0 12px 32px rgba(0,0,0,.25);
-    display:grid; place-items:center; text-align:center; padding:24px;
-  }
-  .cake .name{
-    max-width:85%;
-    font-family:'Great Vibes','Pacifico',cursive;
-    font-weight:400;
-    line-height:1.05;
-    font-size:clamp(32px,6.2vw,64px);
-    letter-spacing:.5px;
-    color:#fff;
-    text-shadow:
-      0 1px 0 #ffc6e5,
-      0 2px 0 #ffadd7,
-      0 6px 18px rgba(255,146,194,.6),
-      0 12px 32px rgba(181,243,255,.35);
-    position:relative;
-  }
-  .cake .name .sub{
-    display:block; font-size:.62em; letter-spacing:1px; text-transform:uppercase;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    background: linear-gradient(90deg,#fff,#ffe08a 35%,#ff92c2 70%,#b5f3ff);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    font-weight:900;
-  }
-  .sparkles{
-    position:absolute; inset:0; pointer-events:none; border-radius:50%;
-    background:
-      radial-gradient(3px 3px at 15% 25%, #fff8, transparent 60%),
-      radial-gradient(3px 3px at 85% 30%, #fff8, transparent 60%),
-      radial-gradient(3px 3px at 30% 75%, #fff8, transparent 60%),
-      radial-gradient(3px 3px at 70% 65%, #fff8, transparent 60%);
-    filter: drop-shadow(0 0 8px rgba(255,255,255,.6));
-  }
+/* 🎂 Bánh kem */
+.cake-wrap {
+  position: relative;
+  width: min(400px,80vw);
+  aspect-ratio: 1/1;
+  margin: 40px auto 0;
+}
+.cake {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #ffd5e5; /* Mặt bánh hồng pastel phẳng */
+  border: 12px solid #fff; /* Viền kem trắng ngoài */
+  box-shadow: 0 0 15px rgba(255,180,210,0.5) inset;
+}
+.cake::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 8px solid #ff9cc7; /* Viền hồng đậm trong */
+}
+.cake::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255,150,200,0.4), transparent 70%);
+  filter: blur(4px);
+}
 
-  .ring{ position:absolute; inset:4% 4% 8% 4%; border-radius:50%; pointer-events:none }
+/* 🕯️ Nến */
+.candle {
+  position: absolute;
+  width: 10px;
+  height: 40px;
+  background: #8fd7ff;
+  border-radius: 5px;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 100%;
+}
+.candle::before {
+  content: "";
+  position: absolute;
+  top: -15px; left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #fffad0 0%, #ffb200 50%, transparent 70%);
+  filter: drop-shadow(0 0 8px #ffb200);
+  animation: flicker 0.1s infinite alternate;
+}
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-50%) scale(1.2) translateY(-1px); }
+}
+.candle.out::before { opacity: 0; }
 
-  .candle{
-    --size:54px; position:absolute; left:50%; top:50%;
-    width:12px; height:var(--size);
-    transform-origin:50% calc(100% - 8px);
-    background:linear-gradient(180deg,var(--candle),#39c5ff);
-    border-radius:6px; box-shadow:inset 0 -6px 0 rgba(0,0,0,.08);
-  }
-  .candle .wick{ position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:2px; height:10px; background:#333; border-radius:1px }
-  .candle::before{
-    content:""; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
-    width:14px; height:20px; border-radius:10px 10px 8px 8px;
-    background:radial-gradient(circle at 50% 35%, #fffad0 0, var(--flame) 45%, #ff7a00 66%, transparent 69%);
-    filter: drop-shadow(0 0 8px rgba(255,176,0,.9));
-    animation:flicker .12s infinite alternate;
-  }
-  .candle.out::before{ opacity:0; animation:none; filter:none }
-  @keyframes flicker{ from{transform:translateX(-50%) scale(1)} to{transform:translateX(-50%) scale(1.06) translateY(-1px)} }
+.smoke {
+  position: absolute;
+  width: 4px;
+  height: 25px;
+  background: linear-gradient(to top, rgba(200,200,200,.4), transparent);
+  left: 50%;
+  top: -15px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  animation: smokeRise 1.5s ease-out forwards;
+}
+@keyframes smokeRise {
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, -40px); }
+}
 
-  .controls{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
-  .btn.secondary{ background:linear-gradient(180deg,var(--accent2),#38dcff); color:#001d28; box-shadow:0 10px 28px rgba(56,220,255,.35) }
-  .hint{ color:var(--muted); text-align:center }
 
-  /* Modal popup quà */
-  .modal{ position:fixed; inset:0; display:none; place-items:center; background: radial-gradient(900px 700px at 70% 0%, rgba(127,144,255,.22), transparent 60%), rgba(5,7,18,.58); backdrop-filter: blur(6px); z-index:60 }
-  .modal.show{ display:grid }
-  .pop{
-    width:min(880px,92vw);
-    background:linear-gradient(165deg,#272a55,#171a36);
-    border:1px solid #2b2e60; border-radius:18px;
-    box-shadow:0 16px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05);
-    padding:20px 20px 16px; position:relative; overflow:hidden;
-  }
-  .pop .header{ display:flex; align-items:center; justify-content:center; gap:8px; font-weight:900; letter-spacing:.3px; margin-bottom:8px }
-  .gift{ font-size:46px; filter:drop-shadow(0 6px 16px rgba(0,0,0,.35)); animation:bounce 1.2s ease infinite }
-  @keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-  .question{ text-align:center; margin:2px 0 10px; color:var(--text) }
+/* ✨ Chữ 2 hàng – căn giữa bánh */
+.name {
+  position: absolute;
+  width: 100%;
+  top: 50%; /* đưa chữ vào đúng giữa bánh */
+  transform: translateY(-50%); /* căn giữa chính xác theo chiều dọc */
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 34px;
+  color: #fff;
+  text-shadow: 0 0 10px #ffc0e4;
+  line-height: 1.2; /* khoảng cách dòng hợp lý */
+}
+.name span:last-child {
+  display: block;
+  color: #ff3f9e;
+  font-size: 38px;
+  margin-top: 4px;
+}
+.typing {
+  display: inline-block;
+  border-right: 3px solid rgba(255,79,161,.7);
+  animation: blink .7s steps(1) infinite;
+}
+@keyframes blink { 50% { border-color: transparent; } }
 
-  /* Arena: INIT = hai nút nằm cùng 1 hàng; sau nhấn "Có" bắt đầu cho "Có" chạy */
-  .arena{
-    position:relative; height:min(58vh,520px);
-    border-radius:14px; overflow:hidden;
-    outline:1px dashed rgba(255,255,255,.06);
-    background:
-      radial-gradient(800px 400px at -100px -120px, rgba(255,255,255,.06), transparent 60%),
-      radial-gradient(800px 400px at 120% 120%, rgba(255,255,255,.05), transparent 60%);
-  }
-  .arena.init{
-    display:flex; align-items:center; justify-content:center; gap:16px;
-  }
-  .btn-yes,.btn-no{
-    position:absolute; border:0; cursor:pointer; font-weight:900; letter-spacing:.2px;
-    padding:12px 18px; border-radius:12px;
-  }
-  .arena.init .btn-yes, .arena.init .btn-no{ position:static } /* cùng một hàng */
+/* 🎁 Popup quà */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(10px);
+  display: none;
+  place-items: center;
+  z-index: 10;
+}
+.modal.show { display: grid; }
+.pop {
+  background: rgba(255,255,255,.3);
+  border: 3px solid rgba(255,150,200,.4);
+  border-radius: 16px;
+  padding: 40px;
+  width: 90vw;
+  height: 80vh;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255,150,200,.3);
+}
+.pop h3 { color: #ff3f9e; font-size: 30px; }
+.question { margin-bottom: 20px; font-size: 20px; color: #661a3a; }
 
-  .btn-yes{
-    background:linear-gradient(180deg,#a6ffb5,#4dff7a);
-    color:#053e18; box-shadow:0 10px 26px rgba(77,255,122,.28);
-    left:10%; top:50%; transform:translate(-50%,-50%); /* dùng translate để neo theo tâm */
-  }
-  .btn-no{
-    background:linear-gradient(180deg,#ffd36e,#ffbb38);
-    color:#3f2500; box-shadow:0 10px 26px rgba(255,187,56,.28);
-    right:10%; top:50%; transform:translate(-50%,-50%);
-    transition: font-size .2s ease, padding .2s ease;
-  }
+.arena {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.btn-yes, .btn-no {
+  padding: 14px 22px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+  position: relative;
+  z-index: 5;
+}
+.btn-yes {
+  background: linear-gradient(120deg,#a6ffb5,#4dff7a);
+  color:#053e18;
+  z-index: 6;
+}
+.btn-no {
+  background: linear-gradient(120deg,#ffd36e,#ffb638);
+  color:#3f2500;
+}
+.btn-yes:hover { transform: scale(1.1); }
+.anchored { position: absolute !important; transform: translate(-50%,-50%) !important; }
 
-  /* Khi "Không" bị đóng băng, giữ nguyên vị trí theo tâm */
-  .anchored{
-    position:absolute !important;
-    transform:translate(-50%,-50%) !important;
-  }
-
-  .close-x{ position:absolute; right:10px; top:8px; background:transparent; border:0; color:#d4d7ff; font-size:26px; cursor:pointer }
-
-  .final{ display:none; text-align:center; margin-top:10px }
-  .wish{ font-size:clamp(22px,4.6vw,38px); margin:8px 0 10px; font-weight:900; text-shadow:0 6px 18px rgba(0,0,0,.25) }
-  .note{ color:var(--muted) }
-
-  .confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:80 }
-  .confetti i{ position:absolute; width:8px; height:14px; background:hsl(var(--h) 90% 60%); top:-20px; left:var(--x,50%); transform:rotate(var(--r,0deg)); animation:fall var(--d,3s) linear forwards; border-radius:2px }
-  @keyframes fall{ to{ transform: translateY(110vh) rotate(1turn) } }
+/* 🎊 Confetti */
+.confetti {
+  position: fixed; inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20;
+}
+.confetti i {
+  position: absolute;
+  width: 8px; height: 14px;
+  background: hsl(var(--h),90%,60%);
+  top: -10px; left: var(--x);
+  transform: rotate(var(--r));
+  animation: fallConfetti var(--d) linear forwards;
+  border-radius: 2px;
+}
+@keyframes fallConfetti {
+  to { transform: translateY(110vh) rotate(1turn); }
+}
+.wish {
+  margin-top: 20px;
+  font-size: 26px;
+  font-family: 'Great Vibes', cursive;
+  color: #ff3f9e;
+  text-shadow: 0 0 10px #ffc0e4;
+}
 </style>
 </head>
 <body>
-  <main class="app">
-    <section class="card" id="card">
-      <div class="cover">
-        <h1 class="title">💌 Thiệp chúc mừng sinh nhật</h1>
-        <p class="subtitle">Nhấn “Mở thiệp” để xem chiếc bánh tròn lung linh dành cho Tuyết Ngọc 🎉</p>
-        <button class="btn" id="openCard">Mở thiệp</button>
-      </div>
 
-      <div class="inside">
-        <div class="stage">
-          <div class="cake-wrap" aria-label="Bánh kem hình tròn">
-            <div class="plate"></div>
-            <div class="cake">
-              <div class="sparkles" aria-hidden="true"></div>
-              <div class="name">
-                Chúc mừng sinh nhật
-                <span class="sub">Tuyết Ngọc ✨</span>
-              </div>
-              <div class="ring" id="ring"><!-- Candles by JS --></div>
-            </div>
-          </div>
+<div id="stars"></div>
 
-          <div class="controls">
-            <button class="btn secondary" id="blow">🎂 Thổi nến</button>
-          </div>
-          <p class="hint">Có 22 cây nến đang tỏa sáng quanh mép bánh…</p>
-        </div>
+<div class="card" id="card">
+  <h1>Thiệp sinh nhật 💌</h1>
+  <p>Nhấn “Mở thiệp” để xem bất ngờ dành cho Tuyết Ngọc 🌸</p>
+  <button class="btn" id="openCard">Mở thiệp</button>
 
-        <div class="final" id="final">
-          <div class="confetti" id="confetti"></div>
-          <p class="wish">Chúc mừng sinh nhật, Tuyết Ngọc! 🎉 Chúc tuổi mới thật rực rỡ, luôn khỏe mạnh, bình an và thành công với mọi ước mơ!</p>
-          <p class="note">Cảm ơn vì đã “không” nhận quà để nhận lời chúc siêu xịn này 💖</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Popup Quà -->
-  <section class="modal" id="modal">
-    <div class="pop">
-      <button class="close-x" id="closeModal" title="Đóng">×</button>
-      <div class="header">
-        <div class="gift" aria-hidden="true">🎁</div>
-        <h3>Quà bí mật cho Tuyết Ngọc</h3>
-        <div class="gift" aria-hidden="true">🎁</div>
-      </div>
-      <p class="question">Có muốn nhận quà không?</p>
-      <div class="arena init" id="arena">
-        <!-- INIT: cùng 1 hàng, nằm giữa -->
-        <button class="btn-yes" id="yesBtn">Có 🥰</button>
-        <button class="btn-no" id="noBtn">Không 😆</button>
+  <div class="inside" id="inside" style="display:none;">
+    <div class="cake-wrap" id="cakeWrap">
+      <div class="cake"></div>
+      <div class="name" id="name">
+        <span id="line1"></span>
+        <span id="line2"></span>
       </div>
     </div>
-  </section>
+    <button class="btn" id="blow">🎂 Thổi nến</button>
+    <div id="final" style="display:none;">
+      <div class="confetti" id="confetti"></div>
+      <p class="wish">Chúc Tuyết Ngọc luôn xinh đẹp, hạnh phúc và rạng rỡ như hôm nay 💖</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="pop">
+    <h3>🎁 Quà bí mật cho Tuyết Ngọc 🎁</h3>
+    <p class="question">Có muốn nhận quà không?</p>
+    <div class="arena" id="arena">
+      <button class="btn-yes" id="yesBtn">Có 🥰</button>
+      <button class="btn-no" id="noBtn">Không 😆</button>
+    </div>
+  </div>
+</div>
 
 <script>
-(() => {
-  const TOTAL = 22;
+// ✨ Sao rơi
+const stars=document.getElementById("stars");
+for(let i=0;i<70;i++){
+  const s=document.createElement("div");
+  s.classList.add("star");
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=3+Math.random()*5+"s";
+  s.style.animationDelay=Math.random()*5+"s";
+  stars.appendChild(s);
+}
 
-  const card = document.getElementById('card');
-  const openCard = document.getElementById('openCard');
-  const blowBtn = document.getElementById('blow');
-  const ring = document.getElementById('ring');
-
-  const modal = document.getElementById('modal');
-  const closeModal = document.getElementById('closeModal');
-  const arena = document.getElementById('arena');
-  const yesBtn = document.getElementById('yesBtn');
-  const noBtn = document.getElementById('noBtn');
-
-  const final = document.getElementById('final');
-  const confettiBox = document.getElementById('confetti');
-
-  /* 1) Mở thiệp */
-  openCard.addEventListener('click', () => {
-    card.classList.add('opened');
-    setTimeout(() => blowBtn.focus(), 400);
-  });
-
-  /* 2) Tạo 22 cây nến quanh mép bánh */
-  function placeCandles(){
-    ring.innerHTML = '';
-    const rect = ring.getBoundingClientRect();
-    const radius = Math.min(rect.width, rect.height)/2 - 6;
-    for (let i = 0; i < TOTAL; i++){
-      const angle = (i / TOTAL) * 360;
-      const c = document.createElement('div');
-      c.className = 'candle';
-      c.style.transform = `translate(-50%, -100%) rotate(${angle}deg) translate(${radius}px) rotate(${-angle}deg)`;
-      const wick = document.createElement('div');
-      wick.className = 'wick';
-      c.appendChild(wick);
-      ring.appendChild(c);
+// ✨ Gõ chữ từng dòng
+function typeText(text, element, callback){
+  let i=0;
+  const span=document.createElement('span');
+  span.className='typing';
+  element.appendChild(span);
+  const typer=setInterval(()=>{
+    span.textContent=text.slice(0,++i);
+    if(i===text.length){
+      clearInterval(typer);
+      span.classList.remove('typing');
+      if(callback) setTimeout(callback,500);
     }
+  },120);
+}
+
+// 🎂 Mở thiệp
+const openCard=document.getElementById('openCard');
+const inside=document.getElementById('inside');
+const cakeWrap=document.getElementById('cakeWrap');
+const blow=document.getElementById('blow');
+const modal=document.getElementById('modal');
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
+const arena=document.getElementById('arena');
+const final=document.getElementById('final');
+const confettiBox=document.getElementById('confetti');
+const line1=document.getElementById('line1');
+const line2=document.getElementById('line2');
+
+openCard.onclick=()=>{
+  inside.style.display='block';
+  openCard.style.display='none';
+  typeText("Chúc mừng sinh nhật", line1, ()=>typeText("Tuyết Ngọc", line2));
+  createCandles();
+};
+
+// 🕯️ Nến
+function createCandles(){
+  for(let i=0;i<22;i++){
+    const c=document.createElement('div');
+    c.className='candle';
+    const angle=(i/22)*360;
+    c.style.transform=`translate(-50%,-100%) rotate(${angle}deg) translate(150px) rotate(${-angle}deg)`;
+    cakeWrap.appendChild(c);
   }
-  window.addEventListener('load', () => setTimeout(placeCandles, 60));
-  window.addEventListener('resize', placeCandles);
+}
 
-  /* 3) Thổi nến ngẫu nhiên rồi bật popup */
-  let blowing = false;
-  blowBtn.addEventListener('click', async () => {
-    if (blowing) return;
-    blowing = true;
-    blowBtn.disabled = true;
-    blowBtn.textContent = 'Đang thổi... 💨';
-
-    const list = Array.from(ring.querySelectorAll('.candle'));
-    const order = list.map((_,i)=>i);
-    for (let i = order.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i+1));
-      [order[i], order[j]] = [order[j], order[i]];
-    }
-    for (const idx of order){
-      list[idx].classList.add('out');
-      await new Promise(r => setTimeout(r, 150));
-    }
-    blowBtn.textContent = 'Đã thổi xong! 🎉';
-    setTimeout(()=> modal.classList.add('show'), 420);
-  });
-
-  /* 4) “Có” chỉ né khi NHẤN vào nó; “Không” KHÔNG BAO GIỜ di chuyển */
-  let clicksOnYes = 0;
-  function moveYesInsideArena(){
-    const bounds = arena.getBoundingClientRect();
-    const btnRect = yesBtn.getBoundingClientRect();
-    const x = Math.max(20, Math.floor(Math.random() * (bounds.width - btnRect.width - 20)));
-    const y = Math.max(20, Math.floor(Math.random() * (bounds.height - btnRect.height - 20)));
-    yesBtn.style.left = x + 'px';
-    yesBtn.style.top  = y + 'px';
-    yesBtn.style.transform = 'translate(-50%,-50%)';
+// 💨 Thổi nến
+blow.onclick=async()=>{
+  const candles=document.querySelectorAll('.candle');
+  blow.disabled=true;
+  for(const c of candles){
+    await new Promise(r=>setTimeout(r,100));
+    c.classList.add('out');
+    const smoke=document.createElement('div');
+    smoke.className='smoke';
+    c.appendChild(smoke);
   }
+  setTimeout(()=>modal.classList.add('show'),1000);
+};
 
-  yesBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    clicksOnYes++;
+// 🎁 Popup
+let firstClick=true;
+yesBtn.onclick=e=>{
+  e.preventDefault();
+  if(firstClick){anchorButtons();firstClick=false;}
+  moveYes();growNo();
+};
+function anchorButtons(){
+  const aRect=arena.getBoundingClientRect();
+  const nRect=noBtn.getBoundingClientRect();
+  const yRect=yesBtn.getBoundingClientRect();
+  noBtn.classList.add('anchored');
+  noBtn.style.left=nRect.left - aRect.left + nRect.width/2+'px';
+  noBtn.style.top=nRect.top - aRect.top + nRect.height/2+'px';
+  yesBtn.classList.add('anchored');
+  yesBtn.style.left=yRect.left - aRect.left + yRect.width/2+'px';
+  yesBtn.style.top=yRect.top - aRect.top + yRect.height/2+'px';
+}
+function moveYes(){
+  const rect=arena.getBoundingClientRect();
+  const x=Math.random()*(rect.width-100)+50;
+  const y=Math.random()*(rect.height-80)+40;
+  yesBtn.style.left=x+'px';
+  yesBtn.style.top=y+'px';
+}
+function growNo(){
+  const fs=parseFloat(getComputedStyle(noBtn).fontSize);
+  const py=parseFloat(getComputedStyle(noBtn).paddingTop);
+  const px=parseFloat(getComputedStyle(noBtn).paddingLeft);
+  noBtn.style.fontSize=(fs+2)+'px';
+  noBtn.style.padding=(py+2)+'px '+(px+3)+'px';
+  noBtn.style.boxShadow='0 0 20px #ffd36e';
+}
+noBtn.onclick=()=>{
+  modal.classList.remove('show');
+  final.style.display='block';
+  shootConfetti();
+};
 
-    // Lần nhấn đầu tiên: chuyển từ hàng ngang -> sân chơi, nhưng "Không" bị đóng băng tại chỗ
-    if (arena.classList.contains('init')) {
-      // Tính tâm của mỗi nút so với arena
-      const aRect = arena.getBoundingClientRect();
-      const noRect = noBtn.getBoundingClientRect();
-      const yesRect = yesBtn.getBoundingClientRect();
-
-      const noCX = noRect.left + noRect.width/2 - aRect.left;
-      const noCY = noRect.top  + noRect.height/2 - aRect.top;
-      const yesCX = yesRect.left + yesRect.width/2 - aRect.left;
-      const yesCY = yesRect.top  + yesRect.height/2 - aRect.top;
-
-      // Bỏ trạng thái init (không còn flex)
-      arena.classList.remove('init');
-
-      // “Đóng băng” KHÔNG: neo tuyệt đối tại vị trí đang có và KHÔNG cập nhật nữa
-      noBtn.classList.add('anchored');
-      noBtn.style.left = noCX + 'px';
-      noBtn.style.top  = noCY + 'px';
-
-      // Thiết lập vị trí ban đầu cho CÓ rồi cho chạy từ lần sau
-      yesBtn.classList.add('anchored');
-      yesBtn.style.left = yesCX + 'px';
-      yesBtn.style.top  = yesCY + 'px';
-      // ngay lập tức né sang chỗ khác để tạo hiệu ứng
-      moveYesInsideArena();
-    } else {
-      // Những lần tiếp theo chỉ di chuyển CÓ
-      moveYesInsideArena();
-    }
-
-    // Làm "Không" bự vô hạn nhưng KHÔNG di chuyển
-    const base = 16; // px
-    const size = base + clicksOnYes * 2;
-    noBtn.style.fontSize = size + 'px';
-    noBtn.style.padding = (12 + clicksOnYes) + 'px ' + (18 + clicksOnYes) + 'px';
-  }, {passive:false});
-
-  // Đóng popup (tuỳ chọn)
-  closeModal.addEventListener('click', () => modal.classList.remove('show'));
-
-  // 5) Chọn "Không" => lời chúc + confetti
-  noBtn.addEventListener('click', () => {
-    modal.classList.remove('show');
-    final.style.display = 'block';
-    final.scrollIntoView({behavior:'smooth', block:'center'});
-    shootConfetti();
-  });
-
-  /* Confetti đơn giản */
-  function shootConfetti(){
-    const N = 140;
-    confettiBox.innerHTML = '';
-    for (let i = 0; i < N; i++){
-      const piece = document.createElement('i');
-      const hue = Math.floor(Math.random()*360);
-      piece.style.setProperty('--h', hue);
-      piece.style.setProperty('--x', Math.random()*100 + 'vw');
-      piece.style.setProperty('--d', (2.5 + Math.random()*2.8) + 's');
-      piece.style.setProperty('--r', (Math.random()*360) + 'deg');
-      confettiBox.appendChild(piece);
-    }
-    setTimeout(() => { confettiBox.innerHTML=''; }, 6500);
+// 🎊 Confetti
+function shootConfetti(){
+  confettiBox.innerHTML='';
+  for(let i=0;i<120;i++){
+    const p=document.createElement('i');
+    p.style.setProperty('--h',Math.floor(Math.random()*360));
+    p.style.setProperty('--x',Math.random()*100+'vw');
+    p.style.setProperty('--r',Math.random()*360+'deg');
+    p.style.setProperty('--d',(2+Math.random()*3)+'s');
+    confettiBox.appendChild(p);
   }
-})();
+  setTimeout(()=>confettiBox.innerHTML='',6000);
+}
 </script>
 </body>
 </html>
