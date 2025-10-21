@@ -297,7 +297,16 @@ h1 {
     <button class="btn" id="blow">🎂 Thổi nến</button>
     <div id="final" style="display:none;">
       <div class="confetti" id="confetti"></div>
-      <p class="wish">Chúc Tuyết Ngọc mãi xinh tươi, rạng rỡ và tràn đầy yêu thương — để nụ cười của Ngọc luôn khiến mọi người quanh mình thấy ấm áp 💕</p>
+<p class="wish" style="font-size: clamp(28px, 8vw, 35px); font-family: 'Great Vibes', cursive; color: #ff3f9e; text-shadow: 0 0 10px #ffc0e4; margin-top: 20px;">
+  Chúc Tuyết Ngọc mãi xinh tươi, rạng rỡ và tràn đầy yêu thương — để nụ cười của Ngọc luôn khiến mọi người quanh mình thấy ấm áp 💕
+</p>
+
+<p class="wish" style="font-size: clamp(14px, 3.6vw, 19px); font-family: 'Poppins', sans-serif; font-style: normal; color: #ff3f9e; text-shadow: 0 0 8px #ffc0e4; margin-top: 10px;">
+  Biết thừa Ngọc không cần quà đâu, vì có lời chúc “hết nước chấm” như này là đủ lung linh cả ngày rồi nè 😜🎂
+</p>
+
+
+
     </div>
   </div>
 </div>
@@ -387,7 +396,7 @@ blow.onclick=async()=>{
   const candles=document.querySelectorAll('.candle');
   blow.disabled=true;
   for(const c of candles){
-    await new Promise(r=>setTimeout(r,100));
+    await new Promise(r=>setTimeout(r,400));
     c.classList.add('out');
     const smoke=document.createElement('div');
     smoke.className='smoke';
