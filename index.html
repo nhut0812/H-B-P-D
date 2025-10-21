@@ -1,232 +1,390 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <title>💐 Chúc mừng 20/10 💐</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      overflow: hidden;
-      height: 100vh;
-      background: linear-gradient(-45deg, #ffb6c1, #ffd1dc, #ff9a9e, #fecfef);
-      background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thiệp Sinh Nhật – Tuyết Ngọc</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1024; --panel:#1a1d3a; --text:#f7f8ff; --muted:#b6bbd8;
+    --accent:#ff7ab6; --accent2:#6ee6ff; --gold:#ffcf4a; --frost:#fff7fb;
+    --cake-pink:#ffb7d9; --cake-cream:#ffe6f4; --plate:#d6e2ff;
+    --candle:#69d0ff; --flame:#ffb200;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 80% -200px, #1d2348 0%, transparent 60%),
+      radial-gradient(1000px 700px at -100px 100%, #2a1a43 0%, transparent 65%),
+      var(--bg);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    display:flex; align-items:center; justify-content:center;
+    overflow-x:hidden;
+  }
+  .app{ width:min(980px,96vw); padding:24px }
 
-    @keyframes gradientMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+  .card{
+    background:linear-gradient(165deg,#262a54,#181a35);
+    border:1px solid #2c2f63; border-radius:20px;
+    box-shadow:0 14px 48px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.05);
+    overflow:hidden; position:relative;
+  }
+  .cover{ padding:48px 28px; text-align:center; transition:.6s ease }
+  .title{ font-size:clamp(26px,4.4vw,40px); margin:0 0 8px }
+  .subtitle{ color:var(--muted); margin:0 0 22px }
+  .btn{
+    appearance:none; border:0; cursor:pointer; padding:14px 20px; border-radius:12px;
+    font-weight:800; letter-spacing:.3px;
+    background:linear-gradient(180deg,var(--accent),#ff4fa1); color:#240018;
+    box-shadow:0 10px 28px rgba(255,79,161,.35); transition:transform .08s ease;
+  }
+  .btn:hover{ transform:translateY(-1px) }
+  .btn:active{ transform:translateY(1px) scale(.98) }
 
-    main {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      box-shadow: 0 8px 30px rgba(255, 105, 180, 0.4);
-      padding: 30px 40px;
-      width: min(90%, 900px);
-      z-index: 2;
-      color: #fff;
-      animation: fadeIn 2s ease forwards;
-    }
+  .inside{ max-height:0; overflow:hidden; opacity:.0; padding:0; transition:max-height .8s ease, opacity .6s ease, padding .6s ease }
+  .card.opened .cover{ transform:translateY(-8px) scale(.985); opacity:.5; filter:blur(.5px) }
+  .card.opened .inside{ max-height:2000px; opacity:1; padding:28px }
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+  .stage{ display:flex; flex-direction:column; align-items:center; gap:16px }
+  .cake-wrap{ position:relative; width:min(560px,90vw); aspect-ratio:1/1; margin:6px auto }
+  .plate{
+    position:absolute; left:50%; transform:translateX(-50%); bottom:-14px;
+    width:88%; height:22px; border-radius:30px;
+    background: radial-gradient(ellipse at center, var(--plate), #c5d3fb 65%, #a3b3ea 100%);
+    filter: drop-shadow(0 10px 24px rgba(0,0,0,.35));
+  }
+  .cake{
+    position:absolute; inset:6% 6% 10% 6%;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), transparent 30%),
+      conic-gradient(from 0deg, #ffd7ec, #ffe9f6, #ffd7ec);
+    box-shadow: inset 0 0 0 10px var(--cake-cream), inset 0 0 0 20px var(--cake-pink), 0 12px 32px rgba(0,0,0,.25);
+    display:grid; place-items:center; text-align:center; padding:24px;
+  }
+  .cake .name{
+    max-width:85%;
+    font-family:'Great Vibes','Pacifico',cursive;
+    font-weight:400;
+    line-height:1.05;
+    font-size:clamp(32px,6.2vw,64px);
+    letter-spacing:.5px;
+    color:#fff;
+    text-shadow:
+      0 1px 0 #ffc6e5,
+      0 2px 0 #ffadd7,
+      0 6px 18px rgba(255,146,194,.6),
+      0 12px 32px rgba(181,243,255,.35);
+    position:relative;
+  }
+  .cake .name .sub{
+    display:block; font-size:.62em; letter-spacing:1px; text-transform:uppercase;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    background: linear-gradient(90deg,#fff,#ffe08a 35%,#ff92c2 70%,#b5f3ff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-weight:900;
+  }
+  .sparkles{
+    position:absolute; inset:0; pointer-events:none; border-radius:50%;
+    background:
+      radial-gradient(3px 3px at 15% 25%, #fff8, transparent 60%),
+      radial-gradient(3px 3px at 85% 30%, #fff8, transparent 60%),
+      radial-gradient(3px 3px at 30% 75%, #fff8, transparent 60%),
+      radial-gradient(3px 3px at 70% 65%, #fff8, transparent 60%);
+    filter: drop-shadow(0 0 8px rgba(255,255,255,.6));
+  }
 
-    h1 {
-      font-size: clamp(36px, 5vw, 60px);
-      font-weight: 800;
-      margin: 0;
-      color: #fff;
-      text-shadow: 0 0 12px #ff7eb3, 0 0 24px #ff69b4;
-      animation: glow 4s ease-in-out infinite alternate;
-    }
+  .ring{ position:absolute; inset:4% 4% 8% 4%; border-radius:50%; pointer-events:none }
 
-    p {
-      font-size: clamp(18px, 2vw, 24px);
-      color: #fff0f5;
-      margin-top: 16px;
-      text-shadow: 0 0 6px rgba(255,0,90,0.6), 0 0 12px rgba(255,180,220,0.9);
-    }
+  .candle{
+    --size:54px; position:absolute; left:50%; top:50%;
+    width:12px; height:var(--size);
+    transform-origin:50% calc(100% - 8px);
+    background:linear-gradient(180deg,var(--candle),#39c5ff);
+    border-radius:6px; box-shadow:inset 0 -6px 0 rgba(0,0,0,.08);
+  }
+  .candle .wick{ position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:2px; height:10px; background:#333; border-radius:1px }
+  .candle::before{
+    content:""; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    width:14px; height:20px; border-radius:10px 10px 8px 8px;
+    background:radial-gradient(circle at 50% 35%, #fffad0 0, var(--flame) 45%, #ff7a00 66%, transparent 69%);
+    filter: drop-shadow(0 0 8px rgba(255,176,0,.9));
+    animation:flicker .12s infinite alternate;
+  }
+  .candle.out::before{ opacity:0; animation:none; filter:none }
+  @keyframes flicker{ from{transform:translateX(-50%) scale(1)} to{transform:translateX(-50%) scale(1.06) translateY(-1px)} }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 15px #ffb6c1, 0 0 25px #ff7eb3; }
-      to { text-shadow: 0 0 25px #fff, 0 0 40px #ff69b4; }
-    }
+  .controls{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
+  .btn.secondary{ background:linear-gradient(180deg,var(--accent2),#38dcff); color:#001d28; box-shadow:0 10px 28px rgba(56,220,255,.35) }
+  .hint{ color:var(--muted); text-align:center }
 
-    img.banner {
-      width: 100%;
-      max-width: 800px;
-      margin: 24px auto 12px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,182,193,0.8);
-      transition: transform .5s ease;
-      animation: float 4s ease-in-out infinite alternate;
-    }
+  /* Modal popup quà */
+  .modal{ position:fixed; inset:0; display:none; place-items:center; background: radial-gradient(900px 700px at 70% 0%, rgba(127,144,255,.22), transparent 60%), rgba(5,7,18,.58); backdrop-filter: blur(6px); z-index:60 }
+  .modal.show{ display:grid }
+  .pop{
+    width:min(880px,92vw);
+    background:linear-gradient(165deg,#272a55,#171a36);
+    border:1px solid #2b2e60; border-radius:18px;
+    box-shadow:0 16px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05);
+    padding:20px 20px 16px; position:relative; overflow:hidden;
+  }
+  .pop .header{ display:flex; align-items:center; justify-content:center; gap:8px; font-weight:900; letter-spacing:.3px; margin-bottom:8px }
+  .gift{ font-size:46px; filter:drop-shadow(0 6px 16px rgba(0,0,0,.35)); animation:bounce 1.2s ease infinite }
+  @keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .question{ text-align:center; margin:2px 0 10px; color:var(--text) }
 
-    @keyframes float {
-      from {transform: translateY(0);}
-      to {transform: translateY(-10px);}
-    }
+  /* Arena: INIT = hai nút nằm cùng 1 hàng; sau nhấn "Có" bắt đầu cho "Có" chạy */
+  .arena{
+    position:relative; height:min(58vh,520px);
+    border-radius:14px; overflow:hidden;
+    outline:1px dashed rgba(255,255,255,.06);
+    background:
+      radial-gradient(800px 400px at -100px -120px, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(800px 400px at 120% 120%, rgba(255,255,255,.05), transparent 60%);
+  }
+  .arena.init{
+    display:flex; align-items:center; justify-content:center; gap:16px;
+  }
+  .btn-yes,.btn-no{
+    position:absolute; border:0; cursor:pointer; font-weight:900; letter-spacing:.2px;
+    padding:12px 18px; border-radius:12px;
+  }
+  .arena.init .btn-yes, .arena.init .btn-no{ position:static } /* cùng một hàng */
 
-    canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+  .btn-yes{
+    background:linear-gradient(180deg,#a6ffb5,#4dff7a);
+    color:#053e18; box-shadow:0 10px 26px rgba(77,255,122,.28);
+    left:10%; top:50%; transform:translate(-50%,-50%); /* dùng translate để neo theo tâm */
+  }
+  .btn-no{
+    background:linear-gradient(180deg,#ffd36e,#ffbb38);
+    color:#3f2500; box-shadow:0 10px 26px rgba(255,187,56,.28);
+    right:10%; top:50%; transform:translate(-50%,-50%);
+    transition: font-size .2s ease, padding .2s ease;
+  }
 
-    .floating {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 0 0 8px rgba(255,0,100,0.8), 0 0 14px rgba(255,255,255,0.9);
-      opacity: 0;
-      animation: floatDown 12s linear forwards;
-      z-index: 2;
-      white-space: nowrap;
-    }
+  /* Khi "Không" bị đóng băng, giữ nguyên vị trí theo tâm */
+  .anchored{
+    position:absolute !important;
+    transform:translate(-50%,-50%) !important;
+  }
 
-    @keyframes floatDown {
-      0% { transform: translateX(-50%) translateY(-10vh) scale(0.9); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateX(-50%) translateY(110vh) scale(1.2); opacity: 0; }
-    }
+  .close-x{ position:absolute; right:10px; top:8px; background:transparent; border:0; color:#d4d7ff; font-size:26px; cursor:pointer }
 
-    #music-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 10;
-      border: none;
-      border-radius: 50%;
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, #ff9a9e, #ff6f91);
-      color: white;
-      font-size: 26px;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-      transition: all .3s ease;
-    }
+  .final{ display:none; text-align:center; margin-top:10px }
+  .wish{ font-size:clamp(22px,4.6vw,38px); margin:8px 0 10px; font-weight:900; text-shadow:0 6px 18px rgba(0,0,0,.25) }
+  .note{ color:var(--muted) }
 
-    #music-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #fff;
-    }
-
-    /* Overlay chào mừng */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,192,203,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      backdrop-filter: blur(6px);
-      transition: opacity .8s ease;
-    }
-    #overlay-content {
-      text-align: center;
-      color: #fff;
-      text-shadow: 0 0 10px #ff69b4;
-    }
-    #start-btn {
-      background: linear-gradient(45deg,#ff6f91,#ffb6c1);
-      border: none;
-      border-radius: 30px;
-      padding: 14px 28px;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.7);
-      transition: transform .3s ease;
-    }
-    #start-btn:hover { transform: scale(1.1); }
-  </style>
+  .confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:80 }
+  .confetti i{ position:absolute; width:8px; height:14px; background:hsl(var(--h) 90% 60%); top:-20px; left:var(--x,50%); transform:rotate(var(--r,0deg)); animation:fall var(--d,3s) linear forwards; border-radius:2px }
+  @keyframes fall{ to{ transform: translateY(110vh) rotate(1turn) } }
+</style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
+  <main class="app">
+    <section class="card" id="card">
+      <div class="cover">
+        <h1 class="title">💌 Thiệp chúc mừng sinh nhật</h1>
+        <p class="subtitle">Nhấn “Mở thiệp” để xem chiếc bánh tròn lung linh dành cho Tuyết Ngọc 🎉</p>
+        <button class="btn" id="openCard">Mở thiệp</button>
+      </div>
 
-  <main>
-    <h1>💐 Chúc mừng Ngày Phụ Nữ Việt Nam 20/10 💐</h1>
-    <img src="assets/20-10.svg" class="banner" alt="Chúc mừng 20/10">
-    <p>Chúc bạn luôn xinh đẹp, mạnh mẽ, rạng rỡ và hạnh phúc mỗi ngày! 🌸</p>
+      <div class="inside">
+        <div class="stage">
+          <div class="cake-wrap" aria-label="Bánh kem hình tròn">
+            <div class="plate"></div>
+            <div class="cake">
+              <div class="sparkles" aria-hidden="true"></div>
+              <div class="name">
+                Chúc mừng sinh nhật
+                <span class="sub">Tuyết Ngọc ✨</span>
+              </div>
+              <div class="ring" id="ring"><!-- Candles by JS --></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn secondary" id="blow">🎂 Thổi nến</button>
+          </div>
+          <p class="hint">Có 22 cây nến đang tỏa sáng quanh mép bánh…</p>
+        </div>
+
+        <div class="final" id="final">
+          <div class="confetti" id="confetti"></div>
+          <p class="wish">Chúc mừng sinh nhật, Tuyết Ngọc! 🎉 Chúc tuổi mới thật rực rỡ, luôn khỏe mạnh, bình an và thành công với mọi ước mơ!</p>
+          <p class="note">Cảm ơn vì đã “không” nhận quà để nhận lời chúc siêu xịn này 💖</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <button id="music-btn" title="Bật/tắt nhạc">🔊</button>
-
-  <audio id="bgm" loop>
-    <source src="assets/soft-piano.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Overlay -->
-  <div id="overlay">
-    <div id="overlay-content">
-      <h2>💐 Chúc mừng 20/10 💐</h2>
-      <p>Nhấn “Bắt đầu” để nghe nhạc và xem thiệp nhé 🎵</p>
-      <button id="start-btn">Bắt đầu 💖</button>
+  <!-- Popup Quà -->
+  <section class="modal" id="modal">
+    <div class="pop">
+      <button class="close-x" id="closeModal" title="Đóng">×</button>
+      <div class="header">
+        <div class="gift" aria-hidden="true">🎁</div>
+        <h3>Quà bí mật cho Tuyết Ngọc</h3>
+        <div class="gift" aria-hidden="true">🎁</div>
+      </div>
+      <p class="question">Có muốn nhận quà không?</p>
+      <div class="arena init" id="arena">
+        <!-- INIT: cùng 1 hàng, nằm giữa -->
+        <button class="btn-yes" id="yesBtn">Có 🥰</button>
+        <button class="btn-no" id="noBtn">Không 😆</button>
+      </div>
     </div>
-  </div>
+  </section>
 
 <script>
-  // 🎉 Confetti
-  (() => {
-    const c = document.getElementById('confetti');
-    const ctx = c.getContext('2d');
-    const DPR = window.devicePixelRatio || 1;
-    let W, H, pieces = [];
-    function resize(){W=c.width=innerWidth*DPR;H=c.height=innerHeight*DPR;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';}
-    function rand(a,b){return a+Math.random()*(b-a);}
-    function spawn(n=220){pieces=Array.from({length:n},()=>({x:rand(0,W),y:rand(-H,0),w:rand(6,16)*DPR,h:rand(8,22)*DPR,vy:rand(1,3)*DPR,vx:rand(-1,1)*DPR,rot:rand(0,Math.PI*2),vr:rand(-0.1,0.1),hue:rand(300,360),sat:rand(70,100),light:rand(60,80),}));}
-    function draw(){ctx.clearRect(0,0,W,H);for(const p of pieces){p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;if(p.y>H+40)p.y=-10;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=`hsl(${p.hue},${p.sat}%,${p.light}%)`;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();}requestAnimationFrame(draw);}
-    addEventListener('resize',resize);resize();spawn();draw();
-  })();
+(() => {
+  const TOTAL = 22;
 
-  // 🌸 Floating text
-  const messages=["💖 Chúc bạn luôn xinh đẹp và rạng rỡ!","🌸 Mãi là bông hoa tươi thắm!","✨ Tự tin – Thành công – Hạnh phúc!","💐 Chúc mừng Ngày Phụ Nữ Việt Nam!","❤️ Cảm ơn vì bạn là chính bạn!","🌷 Hôm nay là của bạn, tận hưởng nhé!","🌹 Happy Vietnamese Women’s Day 20/10!","🌼 Chúc bạn luôn mỉm cười và vui vẻ!","💞 Mong mọi ước mơ của bạn đều thành hiện thực!","🎀 Mỗi ngày đều là ngày đặc biệt của bạn!","🌻 Hãy tỏa sáng như chính bạn!","💫 Gửi ngàn yêu thương đến bạn hôm nay!","🍀 Chúc bạn luôn gặp may mắn và bình an!","💎 Bạn là viên ngọc quý nhất thế gian!","🌈 Cuộc sống đẹp hơn vì có bạn!","💌 Gửi đến bạn muôn vàn lời chúc yêu thương!","🦋 Hãy bay cao với đôi cánh tự tin nhé!","🌺 Ngày 20/10 tràn ngập niềm vui nhé!","💕 Cảm ơn bạn vì đã làm cuộc sống này tươi đẹp hơn!","🎉 Chúc bạn luôn được yêu thương thật nhiều!"];
-  const activeX=[];
-  function createFloatingText(){
-    const msg=messages[Math.floor(Math.random()*messages.length)];
-    const el=document.createElement('div');el.className='floating';el.textContent=msg;
-    let x;const minGap=15;let safe=false;let tries=0;
-    while(!safe&&tries<30){x=Math.random()*80+10;safe=activeX.every(px=>Math.abs(px-x)>minGap);tries++;}
-    activeX.push(x);el.style.left=x+'%';
-    el.style.animationDelay=(Math.random()*2)+'s';
-    el.style.fontSize=(Math.random()*10+22)+'px';
-    el.style.color=`hsl(${Math.random()*60+300},90%,90%)`;
-    document.body.appendChild(el);
-    setTimeout(()=>{el.remove();const idx=activeX.indexOf(x);if(idx>-1)activeX.splice(idx,1);},12000);
-  }
-  setInterval(createFloatingText,900);
+  const card = document.getElementById('card');
+  const openCard = document.getElementById('openCard');
+  const blowBtn = document.getElementById('blow');
+  const ring = document.getElementById('ring');
 
-  // 🎵 Music toggle + overlay
-  const music=document.getElementById('bgm');
-  const btn=document.getElementById('music-btn');
-  const overlay=document.getElementById('overlay');
-  const startBtn=document.getElementById('start-btn');
-  let playing=false;
+  const modal = document.getElementById('modal');
+  const closeModal = document.getElementById('closeModal');
+  const arena = document.getElementById('arena');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
 
-  btn.onclick=()=>{if(playing){music.pause();btn.textContent='🔇';}else{music.play();btn.textContent='🔊';}playing=!playing;};
+  const final = document.getElementById('final');
+  const confettiBox = document.getElementById('confetti');
 
-  startBtn.addEventListener('click',()=>{
-    music.play().then(()=>{
-      btn.textContent='🔊';
-      playing=true;
-      overlay.style.opacity='0';
-      setTimeout(()=>overlay.remove(),800);
-    }).catch(err=>console.log('Không thể phát nhạc:',err));
+  /* 1) Mở thiệp */
+  openCard.addEventListener('click', () => {
+    card.classList.add('opened');
+    setTimeout(() => blowBtn.focus(), 400);
   });
+
+  /* 2) Tạo 22 cây nến quanh mép bánh */
+  function placeCandles(){
+    ring.innerHTML = '';
+    const rect = ring.getBoundingClientRect();
+    const radius = Math.min(rect.width, rect.height)/2 - 6;
+    for (let i = 0; i < TOTAL; i++){
+      const angle = (i / TOTAL) * 360;
+      const c = document.createElement('div');
+      c.className = 'candle';
+      c.style.transform = `translate(-50%, -100%) rotate(${angle}deg) translate(${radius}px) rotate(${-angle}deg)`;
+      const wick = document.createElement('div');
+      wick.className = 'wick';
+      c.appendChild(wick);
+      ring.appendChild(c);
+    }
+  }
+  window.addEventListener('load', () => setTimeout(placeCandles, 60));
+  window.addEventListener('resize', placeCandles);
+
+  /* 3) Thổi nến ngẫu nhiên rồi bật popup */
+  let blowing = false;
+  blowBtn.addEventListener('click', async () => {
+    if (blowing) return;
+    blowing = true;
+    blowBtn.disabled = true;
+    blowBtn.textContent = 'Đang thổi... 💨';
+
+    const list = Array.from(ring.querySelectorAll('.candle'));
+    const order = list.map((_,i)=>i);
+    for (let i = order.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i+1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    for (const idx of order){
+      list[idx].classList.add('out');
+      await new Promise(r => setTimeout(r, 150));
+    }
+    blowBtn.textContent = 'Đã thổi xong! 🎉';
+    setTimeout(()=> modal.classList.add('show'), 420);
+  });
+
+  /* 4) “Có” chỉ né khi NHẤN vào nó; “Không” KHÔNG BAO GIỜ di chuyển */
+  let clicksOnYes = 0;
+  function moveYesInsideArena(){
+    const bounds = arena.getBoundingClientRect();
+    const btnRect = yesBtn.getBoundingClientRect();
+    const x = Math.max(20, Math.floor(Math.random() * (bounds.width - btnRect.width - 20)));
+    const y = Math.max(20, Math.floor(Math.random() * (bounds.height - btnRect.height - 20)));
+    yesBtn.style.left = x + 'px';
+    yesBtn.style.top  = y + 'px';
+    yesBtn.style.transform = 'translate(-50%,-50%)';
+  }
+
+  yesBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    clicksOnYes++;
+
+    // Lần nhấn đầu tiên: chuyển từ hàng ngang -> sân chơi, nhưng "Không" bị đóng băng tại chỗ
+    if (arena.classList.contains('init')) {
+      // Tính tâm của mỗi nút so với arena
+      const aRect = arena.getBoundingClientRect();
+      const noRect = noBtn.getBoundingClientRect();
+      const yesRect = yesBtn.getBoundingClientRect();
+
+      const noCX = noRect.left + noRect.width/2 - aRect.left;
+      const noCY = noRect.top  + noRect.height/2 - aRect.top;
+      const yesCX = yesRect.left + yesRect.width/2 - aRect.left;
+      const yesCY = yesRect.top  + yesRect.height/2 - aRect.top;
+
+      // Bỏ trạng thái init (không còn flex)
+      arena.classList.remove('init');
+
+      // “Đóng băng” KHÔNG: neo tuyệt đối tại vị trí đang có và KHÔNG cập nhật nữa
+      noBtn.classList.add('anchored');
+      noBtn.style.left = noCX + 'px';
+      noBtn.style.top  = noCY + 'px';
+
+      // Thiết lập vị trí ban đầu cho CÓ rồi cho chạy từ lần sau
+      yesBtn.classList.add('anchored');
+      yesBtn.style.left = yesCX + 'px';
+      yesBtn.style.top  = yesCY + 'px';
+      // ngay lập tức né sang chỗ khác để tạo hiệu ứng
+      moveYesInsideArena();
+    } else {
+      // Những lần tiếp theo chỉ di chuyển CÓ
+      moveYesInsideArena();
+    }
+
+    // Làm "Không" bự vô hạn nhưng KHÔNG di chuyển
+    const base = 16; // px
+    const size = base + clicksOnYes * 2;
+    noBtn.style.fontSize = size + 'px';
+    noBtn.style.padding = (12 + clicksOnYes) + 'px ' + (18 + clicksOnYes) + 'px';
+  }, {passive:false});
+
+  // Đóng popup (tuỳ chọn)
+  closeModal.addEventListener('click', () => modal.classList.remove('show'));
+
+  // 5) Chọn "Không" => lời chúc + confetti
+  noBtn.addEventListener('click', () => {
+    modal.classList.remove('show');
+    final.style.display = 'block';
+    final.scrollIntoView({behavior:'smooth', block:'center'});
+    shootConfetti();
+  });
+
+  /* Confetti đơn giản */
+  function shootConfetti(){
+    const N = 140;
+    confettiBox.innerHTML = '';
+    for (let i = 0; i < N; i++){
+      const piece = document.createElement('i');
+      const hue = Math.floor(Math.random()*360);
+      piece.style.setProperty('--h', hue);
+      piece.style.setProperty('--x', Math.random()*100 + 'vw');
+      piece.style.setProperty('--d', (2.5 + Math.random()*2.8) + 's');
+      piece.style.setProperty('--r', (Math.random()*360) + 'deg');
+      confettiBox.appendChild(piece);
+    }
+    setTimeout(() => { confettiBox.innerHTML=''; }, 6500);
+  }
+})();
 </script>
 </body>
 </html>
